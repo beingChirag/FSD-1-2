@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Product Filter</title>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
+    margin: 0;
+    padding: 40px;
+  }
+
+  h1 {
+    text-align: center;
+  }
+
+  .filter-box {
+    text-align: center;
+    margin: 20px 0;
+  }
+
+  select {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 6px;
+  }
+
+  .products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    max-width: 800px;
+    margin: auto;
+  }
+
+  .card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+
+  .tag {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    color: white;
+    font-size: 12px;
+  }
+
+  .electronics {
+    background: #3b82f6;
+  }
+
+  .clothing {
+    background: #93c5fd;
+    color: black;
+  }
+
+</style>
+</head>
+
+<body>
+
+<h1>Product Filter</h1>
+
+<div class="filter-box">
+  Filter by:
+  <select id="filter" onchange="filterProducts()">
+    <option value="all">All Products</option>
+    <option value="electronics">Electronics</option>
+    <option value="clothing">Clothing</option>
+  </select>
+</div>
+
+<div class="products">
+
+  <div class="card" data-category="electronics">
+    <h3>Wireless Headphones</h3>
+    <p>$129.99</p>
+    <span class="tag electronics">electronics</span>
+  </div>
+
+  <div class="card" data-category="clothing">
+    <h3>Cotton T-Shirt</h3>
+    <p>$24.99</p>
+    <span class="tag clothing">clothing</span>
+  </div>
+
+  <div class="card" data-category="electronics">
+    <h3>Bluetooth Speaker</h3>
+    <p>$89.99</p>
+    <span class="tag electronics">electronics</span>
+  </div>
+
+  <div class="card" data-category="clothing">
+    <h3>Denim Jeans</h3>
+    <p>$59.99</p>
+    <span class="tag clothing">clothing</span>
+  </div>
+
+</div>
+
+<script>
+  function filterProducts() {
+    let value = document.getElementById("filter").value;
+    let cards = document.querySelectorAll(".card");
+
+    cards.forEach(card => {
+      let category = card.getAttribute("data-category");
+
+      if (value === "all" || value === category) {
+        card.style.display = "block";
+      } else {
+        card.style.display = "none";
+      }
+    });
+  }
+</script>
+
+</body>
+</html>

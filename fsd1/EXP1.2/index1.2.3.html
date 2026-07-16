@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SVG Drawing Tool</title>
+
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .container {
+    background: #eaeaea;
+    padding: 30px;
+    border-radius: 15px;
+    width: 500px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+
+  .toolbar {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+
+  button {
+    padding: 10px 20px;
+    border: none;
+    background: #3b82f6;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  svg {
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    background: #fff;
+  }
+
+  .count {
+    margin-top: 15px;
+    font-size: 18px;
+  }
+</style>
+
+</head>
+<body>
+
+<div class="container">
+  <div class="toolbar">
+    <button onclick="undo()">Undo</button>
+  </div>
+
+  <svg id="canvas" width="400" height="300"></svg>
+
+  <div class="count">Circles drawn: <span id="count">0</span></div>
+</div>
+
+<script>
+  const svg = document.getElementById("canvas");
+  const countText = document.getElementById("count");
+
+  let circles = [];
+
+  svg.addEventListener("click", function(e) {
+    let rect = svg.getBoundingClientRect();
+    let x = e.clientX - rect.left;
+    let y = e.clientY - rect.top;
+
+    let circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    circle.setAttribute("cx", x);
+    circle.setAttribute("cy", y);
+    circle.setAttribute("r", 6);
+    circle.setAttribute("fill", "#2b6cff");
+
+    svg.appendChild(circle);
+    circles.push(circle);
+
+    updateCount();
+  });
+
+  function undo() {
+    if (circles.length > 0) {
+      let last = circles.pop();
+      svg.removeChild(last);
+      updateCount();
+    }
+  }
+
+  function updateCount() {
+    countText.innerText = circles.length;
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Person Class Hierarchy</title>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
+    margin: 0;
+    padding: 40px;
+  }
+
+  h1 {
+    text-align: center;
+  }
+
+  .container {
+    max-width: 600px;
+    margin: auto;
+  }
+
+  .card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  }
+
+  .name {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .age {
+    margin: 5px 0;
+  }
+
+  .desc {
+    font-style: italic;
+    color: #555;
+    margin: 10px 0;
+  }
+</style>
+
+</head>
+<body>
+
+<h1>Person Class Hierarchy</h1>
+
+<div class="container" id="output"></div>
+
+<script>
+  // Base Class
+  class Person {
+    constructor(name, age) {
+      this.name = name;
+      this.age = age;
+    }
+
+    introduce() {
+      return `Hello, my name is ${this.name}.`;
+    }
+
+    getRole() {
+      return "Person";
+    }
+  }
+
+  // Student Class (inherits Person)
+  class Student extends Person {
+    constructor(name, age, major) {
+      super(name, age);
+      this.major = major;
+    }
+
+    introduce() {
+      return `Hello, my name is ${this.name} and I'm studying ${this.major}.`;
+    }
+
+    getRole() {
+      return "Student";
+    }
+  }
+
+  // Teacher Class (inherits Person)
+  class Teacher extends Person {
+    constructor(name, age, subject) {
+      super(name, age);
+      this.subject = subject;
+    }
+
+    introduce() {
+      return `Hello, my name is ${this.name} and I teach ${this.subject}.`;
+    }
+
+    getRole() {
+      return "Teacher";
+    }
+  }
+
+  // Create objects
+  const people = [
+    new Person("Alex Johnson", 30),
+    new Student("Emma Watson", 20, "Computer Science"),
+    new Teacher("Dr. James Wilson", 45, "Mathematics")
+  ];
+
+  const output = document.getElementById("output");
+
+  // Render UI
+  people.forEach(p => {
+    output.innerHTML += `
+      <div class="card">
+        <div class="name">${p.name} (${p.getRole()})</div>
+        <div class="age">Age: ${p.age}</div>
+        <div class="desc">${p.introduce()}</div>
+        ${p.major ? `<div>Major: ${p.major}</div>` : ""}
+        ${p.subject ? `<div>Teaching: ${p.subject}</div>` : ""}
+      </div>
+    `;
+  });
+</script>
+
+</body>
+</html>

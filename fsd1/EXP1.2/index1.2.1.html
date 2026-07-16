@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Live Character Counter</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #0f172a, #0b2a5b);
+    color: white;
+  }
+
+  .container {
+    text-align: center;
+  }
+
+  textarea {
+    width: 350px;
+    height: 120px;
+    padding: 15px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.2);
+    outline: none;
+    resize: none;
+    background: rgba(255,255,255,0.05);
+    color: white;
+  }
+
+  textarea::placeholder {
+    color: rgba(255,255,255,0.6);
+  }
+
+  .counter {
+    margin-top: 10px;
+    font-size: 18px;
+    text-align: right;
+  }
+
+  .warning {
+    color: orange;
+  }
+
+  .danger {
+    color: red;
+  }
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <textarea id="text" placeholder="Type your message..." maxlength="150"></textarea>
+  <div class="counter" id="counter">0 / 150</div>
+</div>
+
+<script>
+  const text = document.getElementById("text");
+  const counter = document.getElementById("counter");
+  const max = 150;
+
+  text.addEventListener("input", () => {
+    let length = text.value.length;
+    counter.innerText = length + " / " + max;
+
+    // Visual feedback
+    counter.classList.remove("warning", "danger");
+
+    if (length > 100 && length < 140) {
+      counter.classList.add("warning");
+    } else if (length >= 140) {
+      counter.classList.add("danger");
+    }
+  });
+</script>
+
+</body>
+</html>

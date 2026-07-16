@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Product Cards</title>
+
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
+    padding: 40px;
+  }
+
+  .container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .card {
+    width: 220px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  }
+
+  .image {
+    height: 120px;
+    background: #d9d9d9;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+
+  h3 {
+    margin: 10px 0 5px;
+  }
+
+  .price {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+  }
+
+  .in-stock {
+    background: #d1fae5;
+    color: #065f46;
+  }
+
+  .out-stock {
+    background: #fee2e2;
+    color: #991b1b;
+  }
+</style>
+
+</head>
+<body>
+
+<div class="container" id="products"></div>
+
+<script>
+  // Product data (like props in React)
+  const products = [
+    { name: "Wireless Headphones", price: 129.99, inStock: true },
+    { name: "Mechanical Keyboard", price: 89.99, inStock: false },
+    { name: "Smart Watch", price: 199.99, inStock: true }
+  ];
+
+  const container = document.getElementById("products");
+
+  // Function to create card (like a component)
+  function createCard(product) {
+    return `
+      <div class="card">
+        <div class="image"></div>
+        <h3>${product.name}</h3>
+        <div class="price">$${product.price}</div>
+        <span class="badge ${product.inStock ? "in-stock" : "out-stock"}">
+          ${product.inStock ? "In Stock" : "Out of Stock"}
+        </span>
+      </div>
+    `;
+  }
+
+  // Render all products
+  products.forEach(p => {
+    container.innerHTML += createCard(p);
+  });
+</script>
+
+</body>
+</html>
